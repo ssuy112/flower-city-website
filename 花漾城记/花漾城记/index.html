@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <!-- 适配移动端，必须加 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>全国城市市花及代表性植物展示</title>
+    <!-- 引入Bootstrap样式（统一组件） -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- 引入全局样式（后续组员4会完善，先占位） -->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- 自定义临时样式（先保证基础美观，后续替换为组员4的style.css） -->
+    <style>
+        /* 基础样式，避免页面太乱 */
+        body {
+            font-family: "微软雅黑", sans-serif;
+            background-color: #fafafa;
+            color: #333;
+        }
+        /* 导航栏样式 */
+        .navbar {
+            background-color: #f5f5f5 !important;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .navbar a {
+            color: #2e7d32 !important;
+            font-weight: 500;
+        }
+        /* 搜索框区域 */
+        .search-area {
+            margin: 30px auto;
+            max-width: 600px;
+        }
+        .search-btn {
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 4px;
+        }
+        .search-btn:hover {
+            background-color: #388e3c;
+        }
+        /* 热门卡片样式 */
+        .card {
+            margin: 10px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        /* 轮播图 */
+        .carousel-item img {
+            height: 400px;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+    <!-- 1. 顶部导航栏 -->
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">城市花语</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="index.html">首页</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="category.html">城市分类</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 2. 轮播图 -->
+    <div id="flowerCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="https://via.placeholder.com/1200x400?text=北京-月季" class="d-block w-100" alt="北京月季">
+            </div>
+            <div class="carousel-item">
+                <img src="https://via.placeholder.com/1200x400?text=上海-白玉兰" class="d-block w-100" alt="上海白玉兰">
+            </div>
+            <div class="carousel-item">
+                <img src="https://via.placeholder.com/1200x400?text=广州-木棉花" class="d-block w-100" alt="广州木棉花">
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#flowerCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#flowerCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+
+    <!-- 3. 搜索区域 -->
+    <div class="container search-area">
+        <div class="input-group mb-3">
+            <input type="text" id="citySearch" class="form-control" placeholder="输入城市名搜索（如：北京、上海）" aria-label="城市搜索">
+            <button class="btn search-btn" type="button" id="searchBtn">搜索</button>
+        </div>
+    </div>
+
+    <!-- 4. 热门城市卡片 -->
+    <div class="container">
+        <h2 class="text-center mb-4" style="color: #2e7d32;">热门城市市花</h2>
+        <div class="row">
+            <!-- 北京卡片 -->
+            <div class="col-md-2 col-sm-6">
+                <div class="card h-100 text-center" onclick="goToDetail('北京-月季')">
+                    <img src="https://via.placeholder.com/300x200?text=月季" class="card-img-top" alt="北京月季">
+                    <div class="card-body">
+                        <h5 class="card-title">北京</h5>
+                        <p class="card-text">市花：月季</p>
+                    </div>
+                </div>
+            </div>
+            <!-- 上海卡片 -->
+            <div class="col-md-2 col-sm-6">
+                <div class="card h-100 text-center" onclick="goToDetail('上海-白玉兰')">
+                    <img src="https://via.placeholder.com/300x200?text=白玉兰" class="card-img-top" alt="上海白玉兰">
+                    <div class="card-body">
+                        <h5 class="card-title">上海</h5>
+                        <p class="card-text">市花：白玉兰</p>
+                    </div>
+                </div>
+            </div>
+            <!-- 广州卡片 -->
+            <div class="col-md-2 col-sm-6">
+                <div class="card h-100 text-center" onclick="goToDetail('广州-木棉花')">
+                    <img src="https://via.placeholder.com/300x200?text=木棉花" class="card-img-top" alt="广州木棉花">
+                    <div class="card-body">
+                        <h5 class="card-title">广州</h5>
+                        <p class="card-text">市花：木棉花</p>
+                    </div>
+                </div>
+            </div>
+            <!-- 深圳卡片 -->
+            <div class="col-md-2 col-sm-6">
+                <div class="card h-100 text-center" onclick="goToDetail('深圳-三角梅')">
+                    <img src="https://via.placeholder.com/300x200?text=三角梅" class="card-img-top" alt="深圳三角梅">
+                    <div class="card-body">
+                        <h5 class="card-title">深圳</h5>
+                        <p class="card-text">市花：三角梅</p>
+                    </div>
+                </div>
+            </div>
+            <!-- 杭州卡片 -->
+            <div class="col-md-2 col-sm-6">
+                <div class="card h-100 text-center" onclick="goToDetail('杭州-桂花')">
+                    <img src="https://via.placeholder.com/300x200?text=桂花" class="card-img-top" alt="杭州桂花">
+                    <div class="card-body">
+                        <h5 class="card-title">杭州</h5>
+                        <p class="card-text">市花：桂花</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <!-- 南京卡片 -->
+            <div class="col-md-2 col-sm-6">
+                <div class="card h-100 text-center" onclick="goToDetail('南京-梅花')">
+                    <img src="https://via.placeholder.com/300x200?text=梅花" class="card-img-top" alt="南京梅花">
+                    <div class="card-body">
+                        <h5 class="card-title">南京</h5>
+                        <p class="card-text">市花：梅花</p>
+                    </div>
+                </div>
+            </div>
+            <!-- 成都卡片 -->
+            <div class="col-md-2 col-sm-6">
+                <div class="card h-100 text-center" onclick="goToDetail('成都-木芙蓉')">
+                    <img src="https://via.placeholder.com/300x200?text=木芙蓉" class="card-img-top" alt="成都木芙蓉">
+                    <div class="card-body">
+                        <h5 class="card-title">成都</h5>
+                        <p class="card-text">市花：木芙蓉</p>
+                    </div>
+                </div>
+            </div>
+            <!-- 西安卡片 -->
+            <div class="col-md-2 col-sm-6">
+                <div class="card h-100 text-center" onclick="goToDetail('西安-石榴花')">
+                    <img src="https://via.placeholder.com/300x200?text=石榴花" class="card-img-top" alt="西安石榴花">
+                    <div class="card-body">
+                        <h5 class="card-title">西安</h5>
+                        <p class="card-text">市花：石榴花</p>
+                    </div>
+                </div>
+            </div>
+            <!-- 武汉卡片 -->
+            <div class="col-md-2 col-sm-6">
+                <div class="card h-100 text-center" onclick="goToDetail('武汉-梅花')">
+                    <img src="https://via.placeholder.com/300x200?text=梅花" class="card-img-top" alt="武汉梅花">
+                    <div class="card-body">
+                        <h5 class="card-title">武汉</h5>
+                        <p class="card-text">市花：梅花</p>
+                    </div>
+                </div>
+            </div>
+            <!-- 天津卡片 -->
+            <div class="col-md-2 col-sm-6">
+                <div class="card h-100 text-center" onclick="goToDetail('天津-月季')">
+                    <img src="https://via.placeholder.com/300x200?text=月季" class="card-img-top" alt="天津月季">
+                    <div class="card-body">
+                        <h5 class="card-title">天津</h5>
+                        <p class="card-text">市花：月季</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 引入Bootstrap脚本（实现轮播、导航折叠等功能） -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- 引入数据脚本（后续组员5会完善，先占位） -->
+    <script src="js/data.js"></script>
+    <!-- 首页专属脚本 -->
+    <script>
+        // 跳转到详情页的函数
+        function goToDetail(cityFlower) {
+            // 拼接详情页路径，和组员3约定的格式一致
+            window.location.href = `detail/${cityFlower}.html`;
+        }
+
+        // 搜索功能（基础版，后续可调用data.js优化）
+        document.getElementById('searchBtn').addEventListener('click', function() {
+            const searchValue = document.getElementById('citySearch').value.trim();
+            if (!searchValue) {
+                alert('请输入城市名！');
+                return;
+            }
+            // 简单匹配（后续替换为调用data.js的模糊搜索）
+            const cityMap = {
+                '北京': '北京-月季',
+                '上海': '上海-白玉兰',
+                '广州': '广州-木棉花',
+                '深圳': '深圳-三角梅',
+                '杭州': '杭州-桂花',
+                '南京': '南京-梅花',
+                '成都': '成都-木芙蓉',
+                '西安': '西安-石榴花',
+                '武汉': '武汉-梅花',
+                '天津': '天津-月季'
+            };
+            const target = cityMap[searchValue];
+            if (target) {
+                goToDetail(target);
+            } else {
+                alert('暂未收录该城市的信息！');
+            }
+        });
+
+        // 按回车键也能搜索
+        document.getElementById('citySearch').addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                document.getElementById('searchBtn').click();
+            }
+        });
+    </script>
+</body>
+</html>
